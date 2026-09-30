@@ -1,0 +1,50 @@
+{
+  "screens": [
+    "compare",
+    "list"
+  ],
+  "stage": "S5",
+  "retry": 0,
+  "reject": 0,
+  "gate_retry": {
+    "G1": 0,
+    "G2": 0,
+    "G3": 0
+  },
+  "status": "running",
+  "approved": true,
+  "history": [
+    {
+      "at": "2026-09-30 16:16",
+      "event": "new",
+      "screens": [
+        "compare",
+        "list"
+      ]
+    },
+    {
+      "at": "2026-09-30 16:21",
+      "event": "stage",
+      "stage": "S2"
+    },
+    {
+      "at": "2026-09-30 16:22",
+      "event": "stage",
+      "stage": "S3"
+    },
+    {
+      "at": "2026-09-30 16:31",
+      "event": "stage",
+      "stage": "S4"
+    },
+    {
+      "at": "2026-09-30 16:34",
+      "event": "approve"
+    },
+    {
+      "at": "2026-09-30 16:35",
+      "event": "fail",
+      "gate": "G5"
+    }
+  ]
+}

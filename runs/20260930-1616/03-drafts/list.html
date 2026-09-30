@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>일반고 목록 — 고교나침반</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+<style>
+:root {
+  --ink: #141414;
+  --ink-soft: #262626;
+  --canvas: #FFFFFF;
+  --canvas-soft: #F3F3F3;
+  --field: #F0F0F0;
+  --hairline-soft: #F0F0F0;
+  --hairline: #E0E0E0;
+  --text-muted: #707070;
+  --accent: #0066FF;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--field);
+}
+
+body {
+  font-family: 'Pretendard Variable', -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  color: var(--ink);
+}
+
+/* 프레임 */
+.frame {
+  width: 390px;
+  min-height: 844px;
+  margin: 0 auto;
+  background: var(--canvas);
+  padding: 32px 16px 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* 타이포그래피 */
+.eyebrow { font-size: 12px; font-weight: 600; color: var(--text-muted); margin: 0; }
+.heading-1 { font-size: 28px; font-weight: 700; line-height: 1.3; margin: 0; }
+.heading-3 { font-size: 20px; font-weight: 700; line-height: 1.35; margin: 0; }
+.heading-4 { font-size: 18px; font-weight: 700; line-height: 1.35; margin: 0; }
+.body-lg { font-size: 17px; font-weight: 300; line-height: 1.5; margin: 0; }
+.body { font-size: 15px; font-weight: 400; line-height: 1.5; margin: 0; }
+.body-sm { font-size: 13px; font-weight: 400; line-height: 1.5; margin: 0; }
+.caption { font-size: 12px; font-weight: 400; line-height: 1.4; color: var(--text-muted); margin: 0; }
+.text-muted { color: var(--text-muted); }
+.tabular { font-variant-numeric: tabular-nums; }
+
+.topbar { display: flex; flex-direction: column; gap: 8px; }
+
+/* filter-chip */
+.chip-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.filter-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  background: var(--canvas-soft);
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 600;
+  border: 0;
+}
+.filter-chip.is-selected {
+  background: var(--ink);
+  color: var(--canvas);
+}
+
+/* school-card */
+.school-list { display: flex; flex-direction: column; gap: 16px; }
+.school-card {
+  position: relative;
+  background: var(--canvas);
+  border: 1px solid var(--hairline-soft);
+  border-radius: 24px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.school-card.is-selected {
+  background: var(--canvas-soft);
+  border-color: var(--canvas-soft);
+}
+.card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+.check-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  flex: 0 0 auto;
+  border-radius: 9999px;
+  background: var(--ink);
+  color: var(--canvas);
+  font-size: 13px;
+  font-weight: 700;
+}
+.stat-row { display: flex; align-items: center; gap: 8px; color: var(--ink-soft); }
+.stat-dot { color: var(--hairline); }
+
+/* school-tag */
+.tag-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.school-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  border: 1px solid var(--hairline);
+  background: var(--canvas);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+/* data-source-bar */
+.data-source-bar { background: var(--canvas-soft); border-radius: 16px; padding: 8px 12px; }
+
+/* empty-state */
+.empty-state-demo { display: flex; flex-direction: column; gap: 12px; }
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 24px;
+  border-radius: 24px;
+  background: var(--canvas-soft);
+}
+.button-pill-soft {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 12px 16px;
+  border-radius: 9999px;
+  background: var(--canvas);
+  color: var(--ink);
+  border: 0;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+/* 선택 카운터 + button-primary */
+.selected-counter { display: flex; align-items: center; gap: 4px; }
+.count-value { color: var(--accent); font-weight: 700; }
+.cta-dock { display: flex; flex-direction: column; gap: 8px; }
+.button-primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 44px;
+  padding: 12px 16px;
+  border-radius: 9999px;
+  background: var(--ink);
+  color: var(--canvas);
+  border: 0;
+  font-size: 15px;
+  font-weight: 600;
+}
+</style>
+</head>
+<body>
+<div class="frame">
+
+  <header class="topbar">
+    <p class="eyebrow">고교나침반</p>
+    <h1 class="heading-1">은평구 일반고 목록</h1>
+    <p class="body-lg">관심 있는 학교를 골라 비교해보세요.</p>
+  </header>
+
+  <!-- filter-chip : 상단 필터 -->
+  <section aria-label="필터">
+    <div class="chip-row">
+      <button type="button" class="filter-chip is-selected">은평구</button>
+      <button type="button" class="filter-chip">전체</button>
+      <button type="button" class="filter-chip">공립</button>
+      <button type="button" class="filter-chip">사립</button>
+    </div>
+  </section>
+
+  <!-- school-card : 일반고 9곳 -->
+  <section class="school-list" aria-label="일반고 목록">
+
+    <article class="school-card is-selected">
+      <div class="card-top">
+        <h3 class="heading-3">동명여자고등학교</h3>
+        <span class="check-badge" aria-hidden="true">✓</span>
+      </div>
+      <p class="body-sm text-muted">서울특별시 은평구 통일로 793</p>
+      <p class="body-sm stat-row"><span class="tabular">학생수 835명</span><span class="stat-dot">·</span><span class="tabular">교원 77명</span></p>
+      <div class="tag-row">
+        <span class="school-tag">사립</span>
+        <span class="school-tag">여자</span>
+        <span class="school-tag">학생수 중간 구간</span>
+      </div>
+    </article>
+
+    <article class="school-card">
+      <div class="card-top">
+        <h3 class="heading-3">선일여자고등학교</h3>
+      </div>
+      <p class="body-sm text-muted">서울특별시 은평구 갈현로29길 27</p>
+      <p class="body-sm stat-row"><span class="tabular">학생수 570명</span><span class="stat-dot">·</span><span class="tabular">교원 61명</span></p>
+      <div class="tag-row">
+        <span class="school-tag">사립</span>
+        <span class="school-tag">여자</span>
+        <span class="school-tag">학생수 소규모 구간</span>
+      </div>
+    </article>
+
+    <article class="school-card is-selected">
+      <div class="card-top">
+        <h3 class="heading-3">선정고등학교</h3>
+        <span class="check-badge" aria-hidden="true">✓</span>
+      </div>
+      <p class="body-sm text-muted">서울특별시 은평구 서오릉로20길 19</p>
+      <p class="body-sm stat-row"><span class="tabular">학생수 1,056명</span><span class="stat-dot">·</span><span class="tabular">교원 85명</span></p>
+      <div class="tag-row">
+        <span class="school-tag">사립</span>
+        <span class="school-tag">남녀공학</span>
+        <span class="school-tag">학생수 대규모 구간</span>
+      </div>
+    </article>
+
+    <article class="school-card">
+      <div class="card-top">
+        <h3 class="heading-3">숭실고등학교</h3>
+      </div>
+      <p class="body-sm text-muted">서울특별시 은평구 은평터널로7길 6</p>
+      <p class="body-sm stat-row"><span class="tabular">학생수 1,099명</span><span class="stat-dot">·</span><span class="tabular">교원 91명</span></p>
+      <div class="tag-row">
+        <span class="school-tag">사립</span>
+        <span class="school-tag">남자</span>
+        <span class="school-tag">학생수 대규모 구간</span>
+      </div>
+    </article>
+
+    <article class="school-card is-selected">
+      <div class="card-top">
+        <h3 class="heading-3">신도고등학교</h3>
+        <span class="check-badge" aria-hidden="true">✓</span>
+      </div>
+      <p class="body-sm text-muted">서울특별시 은평구 통일로 961</p>
+      <p class="body-sm stat-row"><span class="tabular">학생수 586명</span><span class="stat-dot">·</span><span class="tabular">교원 68명</span></p>
+      <div class="tag-row">
+        <span class="school-tag">공립</span>
+        <span class="school-tag">남녀공학</span>
+        <span class="school-tag">학생수 소규모 구간</span>
+      </div>
+    </article>
+
+    <article class="school-card">
+      <div class="card-top">
+        <h3 class="heading-3">예일여자고등학교</h3>
+      </div>
+      <p class="body-sm text-muted">서울특별시 은평구 연서로 117</p>
+      <p class="body-sm stat-row"><span class="tabular">학생수 759명</span><span class="stat-dot">·</span><span class="tabular">교원 76명</span></p>
+      <div class="tag-row">
+        <span class="school-tag">사립</span>
+        <span class="school-tag">여자</span>
+        <span class="school-tag">학생수 중간 구간</span>
+      </div>
+    </article>
+
+    <article class="school-card is-selected">
+      <div class="card-top">
+        <h3 class="heading-3">은평고등학교</h3>
+        <span class="check-badge" aria-hidden="true">✓</span>
+      </div>
+      <p class="body-sm text-muted">서울특별시 은평구 갈현로15길 47</p>
+      <p class="body-sm stat-row"><span class="tabular">학생수 462명</span><span class="stat-dot">·</span><span class="tabular">교원 56명</span></p>
+      <div class="tag-row">
+        <span class="school-tag">공립</span>
+        <span class="school-tag">남녀공학</span>
+        <span class="school-tag">학생수 소규모 구간</span>
+      </div>
+    </article>
+
+    <article class="school-card">
+      <div class="card-top">
+        <h3 class="heading-3">진관고등학교</h3>
+      </div>
+      <p class="body-sm text-muted">서울특별시 은평구 진관4로 26</p>
+      <p class="body-sm stat-row"><span class="tabular">학생수 821명</span><span class="stat-dot">·</span><span class="tabular">교원 74명</span></p>
+      <div class="tag-row">
+        <span class="school-tag">공립</span>
+        <span class="school-tag">남녀공학</span>
+        <span class="school-tag">학생수 중간 구간</span>
+      </div>
+    </article>
+
+    <article class="school-card">
+      <div class="card-top">
+        <h3 class="heading-3">충암고등학교</h3>
+      </div>
+      <p class="body-sm text-muted">서울특별시 은평구 가좌로5길 5</p>
+      <p class="body-sm stat-row"><span class="tabular">학생수 1,044명</span><span class="stat-dot">·</span><span class="tabular">교원 88명</span></p>
+      <div class="tag-row">
+        <span class="school-tag">사립</span>
+        <span class="school-tag">남자</span>
+        <span class="school-tag">학생수 대규모 구간</span>
+      </div>
+    </article>
+
+  </section>
+
+  <!-- data-source-bar : 목록 데이터 블록 바로 아래 -->
+  <div class="data-source-bar">
+    <p class="caption">은평구 일반고 실데이터 · 기준 2026.09.16 · 출처 NEIS·학교알리미</p>
+  </div>
+
+  <!-- empty-state : 필터 결과가 없을 때 -->
+  <section class="empty-state-demo" aria-label="빈 결과 상태 예시">
+    <h2 class="heading-4">빈 결과 상태 예시</h2>
+    <div class="empty-state">
+      <p class="body text-muted">선택한 조건에 맞는 학교가 없어요.</p>
+      <p class="body text-muted">필터를 조정해서 다시 찾아보세요.</p>
+      <button type="button" class="button-pill-soft">필터 초기화</button>
+    </div>
+  </section>
+
+  <!-- button-primary : 2곳 이상 선택 시 비교하기 -->
+  <div class="selected-counter">
+    <p class="body">선택한 학교 <span class="count-value tabular">4</span>곳</p>
+  </div>
+  <div class="cta-dock">
+    <button type="button" class="button-primary">비교하기</button>
+  </div>
+
+</div>
+</body>
+</html>
