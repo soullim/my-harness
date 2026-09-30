@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>고교나침반 — 유저스토리</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+<style>
+  :root{
+    --ink:#141414; --ink-soft:#262626; --canvas:#ffffff; --canvas-soft:#f3f3f3;
+    --field:#f0f0f0; --hairline-soft:#f0f0f0; --hairline:#e0e0e0;
+    --text-muted:#707070; --text-faint:#adadad; --accent:#0066ff;
+  }
+  *{ box-sizing:border-box; }
+  body{
+    margin:0; background:var(--canvas); color:var(--ink);
+    font-family:"Pretendard Variable","Pretendard",-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;
+    letter-spacing:0; line-height:1.5;
+  }
+  .wrap{ max-width:760px; margin:0 auto; padding:64px 24px 96px; }
+  .eyebrow{ font-size:12px; font-weight:600; color:var(--text-muted); margin-bottom:8px; }
+  h1{ font-size:32px; font-weight:700; line-height:1.3; margin:0 0 16px; }
+  .lead{ font-size:17px; font-weight:300; line-height:1.5; color:var(--ink-soft); margin:0 0 48px; max-width:56ch; }
+  h2{ font-size:24px; font-weight:700; line-height:1.35; margin:0 0 16px; }
+  section{ margin-top:48px; }
+  .persona-card{
+    background:var(--canvas-soft); border-radius:24px; padding:24px; margin-bottom:8px;
+  }
+  .persona-card .label{ font-size:12px; font-weight:600; color:var(--text-muted); margin-bottom:4px; }
+  .persona-card p{ font-size:15px; margin:0; }
+  .story-list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:12px; }
+  .story-item{
+    display:flex; gap:16px; align-items:flex-start;
+    background:var(--canvas); border:1px solid var(--hairline-soft); border-radius:24px; padding:24px;
+  }
+  .story-num{
+    flex:none; width:32px; height:32px; border-radius:9999px; background:var(--ink); color:var(--canvas);
+    display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700;
+  }
+  .story-item p{ margin:0; font-size:17px; font-weight:600; line-height:1.4; }
+  table{ width:100%; border-collapse:collapse; font-size:15px; }
+  th, td{ text-align:left; padding:12px; border-bottom:1px solid var(--hairline); vertical-align:top; }
+  th{ font-size:12px; font-weight:600; color:var(--text-muted); text-transform:none; }
+  .tag{
+    display:inline-flex; align-items:center; border-radius:9999px; border:1px solid var(--hairline);
+    background:var(--canvas); font-size:12px; font-weight:600; padding:4px 12px; margin:2px 4px 2px 0;
+  }
+  .tag.must{ background:var(--ink); color:var(--canvas); border-color:var(--ink); }
+  .dont-list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:8px; }
+  .dont-list li{
+    font-size:15px; padding:16px; background:var(--canvas-soft); border-radius:16px;
+  }
+  .rule-card{
+    border:1px solid var(--hairline); border-radius:16px; padding:16px; margin-bottom:12px;
+  }
+  .rule-id{
+    display:inline-flex; font-size:12px; font-weight:700; color:var(--canvas); background:var(--ink);
+    border-radius:9999px; padding:2px 10px; margin-bottom:8px;
+  }
+  .rule-card p{ margin:4px 0 0; font-size:14px; color:var(--ink-soft); }
+  .note{
+    background:var(--canvas-soft); border-radius:16px; padding:16px 20px; font-size:13px; color:var(--text-muted);
+  }
+  footer{
+    margin-top:64px; padding-top:24px; border-top:1px solid var(--hairline); font-size:12px; color:var(--text-muted);
+  }
+  footer a{ color:var(--accent); text-decoration:none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="eyebrow">고교나침반</div>
+  <h1>유저스토리</h1>
+  <p class="lead">고교나침반은 학교알리미·NEIS·교육청 전형포털에 흩어진 일반고 정보를 한곳에 모아, 우리 지역 일반고를 실데이터로 비교하고 선택하도록 돕는 웹 서비스다.</p>
+
+  <section>
+    <h2>주요 사용자</h2>
+    <div class="persona-card">
+      <div class="label">누구</div>
+      <p>은평구에 사는 중3 자녀의 학부모. 특목고·자사고 대신 일반고 진학을 고려하는 가정.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>유저스토리 (5개)</h2>
+    <ol class="story-list">
+      <li class="story-item"><span class="story-num">1</span><p>학부모가 시군구를 선택해 관할 교육지원청과 배정방식을 확인한다</p></li>
+      <li class="story-item"><span class="story-num">2</span><p>학부모가 지역 일반고 목록과 학교별 기본정보를 확인한다</p></li>
+      <li class="story-item"><span class="story-num">3</span><p>학부모가 관심학교 2~4곳을 실데이터로 비교한다</p></li>
+      <li class="story-item"><span class="story-num">4</span><p>학부모가 우선순위 조건을 선택해 추천순위를 받는다</p></li>
+      <li class="story-item"><span class="story-num">5</span><p>학부모가 올해 바뀐 입시정책이 우리 지역 배정에 미치는 영향을 확인한다</p></li>
+    </ol>
+    <p style="font-size:13px;color:var(--text-muted);margin-top:12px;">※ 학생 성향 입력 추천은 PRD상 2단계라 이번 범위에서 제외</p>
+  </section>
+
+  <section>
+    <h2>만들 화면 (5개)</h2>
+    <table>
+      <thead><tr><th>화면</th><th>보여줄 것</th><th>우선순위</th><th>유저스토리</th></tr></thead>
+      <tbody>
+        <tr><td>지역 선택</td><td>시군구 선택 → 관할 교육지원청, 배정방식 요약</td><td><span class="tag must">Must</span></td><td>1</td></tr>
+        <tr><td>일반고 목록</td><td>학교 카드(주소·설립·남녀공학·학생/교원수), 중점학교 태그</td><td><span class="tag must">Must</span> <span class="tag">중점학교 태그 Could</span></td><td>2</td></tr>
+        <tr><td>학교 비교</td><td>선택한 2~4개교 막대 비교 + 데이터 표</td><td><span class="tag must">Must</span></td><td>3</td></tr>
+        <tr><td>조건 매칭</td><td>우선순위 조건 → 추천순위</td><td><span class="tag">Should</span></td><td>4</td></tr>
+        <tr><td>정책 업데이트</td><td>입시정책 변경 타임라인 + 지역 배정 영향</td><td><span class="tag">Should</span></td><td>5</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>안 할 것</h2>
+    <ul class="dont-list">
+      <li>학생 실명·성적 등 개인정보 수집</li>
+      <li>학교 후기 (1차 범위 제외)</li>
+      <li>부동산 학군·배정 아파트 정보, 특목고·자사고 진학률 랭킹</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>판정 기준 — 어기면 안 되는 것</h2>
+    <div class="rule-card">
+      <span class="rule-id">V1</span>
+      <div style="font-weight:600;font-size:15px;">서열화 금지</div>
+      <p>화면 텍스트에 "N위" "N등" "상위 N%" "랭킹" 0건 · 학업성취도 원자료 값 0건</p>
+    </div>
+    <div class="rule-card">
+      <span class="rule-id">V2</span>
+      <div style="font-weight:600;font-size:15px;">기준 시점·출처 표기</div>
+      <p>데이터가 나오는 화면마다 "기준 YYYY.MM.DD" 1개 이상 + "출처" 1개 이상</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>참고: 중점학업방식 데이터 메모</h2>
+    <p class="note">전국 통합 데이터셋이 없다. NEIS "학교학과정보" API는 특성화고 학과 구분용이라 부적합하고, 학교알리미 "교육과정 편성" 공시는 PDF 서술형이다. 시도교육청 개별 PDF·보도자료로만 공개되므로(예: 인천 18개교, 경기 64개교) 지역별 수작업 큐레이션이 필요하다.</p>
+  </section>
+
+  <footer>
+    고교나침반 하네스 · docs/story-service.md 확정본 기준 · <a href="https://claude.ai/code/artifact/ed4218ed-72bc-4a26-8ed6-7545846b132d">PRD 원문</a>
+  </footer>
+
+</div>
+</body>
+</html>
