@@ -1,0 +1,79 @@
+{
+  "_note": "서울특별시 은평구 소재 일반고 9개교 실데이터. 기본정보(설립, 남녀공학, 주소, 개교일 등)는 NEIS 교육정보 개방포털 Open API(open.neis.go.kr, 2026-09-16 조회)로 확인했고, 학생수·교원수는 학교알리미(schoolinfo.go.kr) 학교별 공시페이지에서 가져왔다. 학교알리미 수치는 공시 시점(보통 매년 4월 1일 기준, 5월 말 갱신)에 따라 검색 시점별로 소폭 달라질 수 있어 '기준연도 미상(최근 공시)'으로 표기한다. 학급수·선택과목 수·진학현황·전출입률·시설재정 지표는 이 페이지들에서 안정적으로 추출되지 않아(표 구조가 복잡해 자동 추출 시 오독 위험) 이번 버전에는 넣지 않았다 — data.go.kr CSV 병합 단계에서 정식으로 채울 예정.",
+  "region": {
+    "name": "서울특별시 은평구",
+    "office_of_edu": "서울특별시서부교육지원청 (마포구·서대문구·은평구 관할)",
+    "assignment_method": "서울시 고교선택제 — 2학군(서부) 소속, 선지원 후추첨 방식으로 일반고 배정",
+    "source": "서울시교육청, 서부교육지원청 공지 기준"
+  },
+  "schools": [
+    {
+      "school_code": "7010153", "name": "동명여자고등학교", "hs_type": "일반고", "establishment": "사립", "coed": "여자",
+      "address": "서울특별시 은평구 통일로 793", "founded": "1921-06-03", "homepage": "http://dongmyung.sen.hs.kr",
+      "students_total": 835, "teachers_total": 77
+    },
+    {
+      "school_code": "7010190", "name": "선일여자고등학교", "hs_type": "일반고", "establishment": "사립", "coed": "여자",
+      "address": "서울특별시 은평구 갈현로29길 27", "founded": "1971-12-27", "homepage": "http://sunil.sen.hs.kr",
+      "students_total": 570, "teachers_total": 61
+    },
+    {
+      "school_code": "7010191", "name": "선정고등학교", "hs_type": "일반고", "establishment": "사립", "coed": "남녀공학",
+      "address": "서울특별시 은평구 서오릉로20길 19", "founded": "1950-05-22", "homepage": "http://sunjung.sen.hs.kr",
+      "students_total": 1056, "teachers_total": 85
+    },
+    {
+      "school_code": "7010203", "name": "숭실고등학교", "hs_type": "일반고", "establishment": "사립", "coed": "남자",
+      "address": "서울특별시 은평구 은평터널로7길 6", "founded": "1897-10-10", "homepage": "http://soongsil.sen.hs.kr",
+      "students_total": 1099, "teachers_total": 91
+    },
+    {
+      "school_code": "7010983", "name": "신도고등학교", "hs_type": "일반고", "establishment": "공립", "coed": "남녀공학",
+      "address": "서울특별시 은평구 통일로 961", "founded": "2011-03-01", "homepage": "https://sindo.sen.hs.kr",
+      "students_total": 586, "teachers_total": 68
+    },
+    {
+      "school_code": "7010219", "name": "예일여자고등학교", "hs_type": "일반고", "establishment": "사립", "coed": "여자",
+      "address": "서울특별시 은평구 연서로 117", "founded": "1965-09-26", "homepage": "http://www.yale.hs.kr",
+      "students_total": 759, "teachers_total": 76
+    },
+    {
+      "school_code": "7010882", "name": "은평고등학교", "hs_type": "일반고", "establishment": "공립", "coed": "남녀공학",
+      "address": "서울특별시 은평구 갈현로15길 47", "founded": "2009-03-01", "homepage": "http://ep.sen.hs.kr",
+      "students_total": 462, "teachers_total": 56
+    },
+    {
+      "school_code": "7010883", "name": "진관고등학교", "hs_type": "일반고", "establishment": "공립", "coed": "남녀공학",
+      "address": "서울특별시 은평구 진관4로 26", "founded": "2009-01-02", "homepage": "",
+      "students_total": 821, "teachers_total": 74
+    },
+    {
+      "school_code": "7010248", "name": "충암고등학교", "hs_type": "일반고", "establishment": "사립", "coed": "남자",
+      "address": "서울특별시 은평구 가좌로5길 5", "founded": "1968-01-10", "homepage": "",
+      "students_total": 1044, "teachers_total": 88
+    }
+  ],
+  "context_schools": [
+    {
+      "school_code": "7010918", "name": "하나고등학교", "hs_type": "자율고(전국단위 자사고)", "establishment": "사립", "coed": "남녀공학",
+      "address": "서울특별시 은평구 연서로 535", "note": "일반고는 아니지만 은평구 소재라 지원 여부 판단 시 함께 언급되는 경우가 많아 참고용으로 포함"
+    }
+  ],
+  "policy_updates": [
+    {
+      "date": "2025-03",
+      "title": "고교학점제 전 학년 전면 시행",
+      "summary": "전국 모든 고등학교에서 학생이 진로에 따라 과목을 선택·이수하는 고교학점제가 전 학년 대상으로 시행됨. 학교별 선택과목 개설 수 편차가 커져 진학 전 확인이 중요해짐."
+    },
+    {
+      "date": "2026-02",
+      "title": "학점 이수 기준 완화",
+      "summary": "2026학년도 1·2학년부터 창의적 체험활동 출석 기준이 '3년 총 수업시수'에서 '학년별 수업일수' 기준으로 바뀌고, 선택과목의 학업성취율 기준이 폐지되어 출석률만 반영됨."
+    },
+    {
+      "date": "2026-08",
+      "title": "일부 외고의 전국단위 자사고 전환 추진",
+      "summary": "일부 지역 외국어고가 전국단위 자율형사립고 전환을 추진 중. 전환 시 외국어 시수를 줄이고 수학·과학 시수를 늘리는 방향으로, 인근 일반고 지원 경쟁률에도 영향을 줄 수 있어 지역별 동향 확인이 필요함."
+    }
+  ]
+}

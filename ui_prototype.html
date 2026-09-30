@@ -1,0 +1,516 @@
+<title>고교나침반</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;700;900&family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+  :root{
+    color-scheme: light;
+    --bg:#f5f7fa;
+    --surface:#ffffff;
+    --surface-2:#eef1f6;
+    --border:#e0e4ec;
+    --text-primary:#14171f;
+    --text-secondary:#565e6d;
+    --text-muted:#8a8f9c;
+    --accent:#2a78d6;
+    --accent-ink:#ffffff;
+    --warm:#eb6834;
+    --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a; --s4:#eda100;
+    --grid:#e1e0d9;
+    --chip-bg:#eaf1fb;
+    --chip-warm-bg:#fdece3;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      color-scheme: dark;
+      --bg:#0e1116;
+      --surface:#171b22;
+      --surface-2:#1d222b;
+      --border:rgba(255,255,255,0.10);
+      --text-primary:#f2f4f8;
+      --text-secondary:#b7bec9;
+      --text-muted:#7e8592;
+      --accent:#3987e5;
+      --accent-ink:#0e1116;
+      --warm:#d95926;
+      --s1:#3987e5; --s2:#d95926; --s3:#199e70; --s4:#c98500;
+      --grid:#2c2c2a;
+      --chip-bg:#1a2634;
+      --chip-warm-bg:#2b1d16;
+    }
+  }
+  :root[data-theme="dark"]{
+    color-scheme: dark;
+    --bg:#0e1116;
+    --surface:#171b22;
+    --surface-2:#1d222b;
+    --border:rgba(255,255,255,0.10);
+    --text-primary:#f2f4f8;
+    --text-secondary:#b7bec9;
+    --text-muted:#7e8592;
+    --accent:#3987e5;
+    --accent-ink:#0e1116;
+    --warm:#d95926;
+    --s1:#3987e5; --s2:#d95926; --s3:#199e70; --s4:#c98500;
+    --grid:#2c2c2a;
+    --chip-bg:#1a2634;
+    --chip-warm-bg:#2b1d16;
+  }
+
+  *{ box-sizing:border-box; }
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text-primary);
+    font-family:"IBM Plex Sans KR", system-ui, -apple-system, sans-serif;
+    line-height:1.5;
+  }
+  .wrap{ max-width:1180px; margin:0 auto; padding:40px 24px 80px; }
+
+  h1,h2,h3{ font-family:"Noto Serif KR", serif; text-wrap:balance; margin:0; }
+  .mono{ font-family:"IBM Plex Mono", ui-monospace, monospace; font-variant-numeric:tabular-nums; }
+
+  header.top{ display:flex; align-items:flex-start; justify-content:space-between; gap:24px; margin-bottom:14px; flex-wrap:wrap; }
+  header.top .title-block h1{ font-size:32px; font-weight:900; letter-spacing:-0.01em; }
+  header.top .title-block p{ margin:8px 0 0; color:var(--text-secondary); font-size:15px; max-width:56ch; }
+  .badge{
+    display:inline-flex; align-items:center; gap:6px;
+    border-radius:999px; padding:6px 14px; font-size:12.5px; font-weight:600;
+    white-space:nowrap; border:1px solid var(--border);
+  }
+  .badge.real{ background:var(--chip-bg); color:var(--accent); }
+  .badge.real::before{ content:"●"; font-size:8px; }
+  .badge-row{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:32px; }
+
+  .source-note{
+    background:var(--surface-2); border:1px solid var(--border); border-radius:10px;
+    padding:12px 16px; font-size:12.5px; color:var(--text-secondary); margin-bottom:8px;
+  }
+  .source-note b{ color:var(--text-primary); }
+
+  section{ margin-top:44px; }
+  section > .section-head{ display:flex; align-items:baseline; justify-content:space-between; gap:16px; margin-bottom:16px; flex-wrap:wrap; }
+  section > .section-head h2{ font-size:21px; font-weight:700; }
+  section > .section-head .hint{ color:var(--text-muted); font-size:13px; }
+
+  .region-bar{
+    display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+    background:var(--surface); border:1px solid var(--border); border-radius:12px;
+    padding:14px 18px;
+  }
+  .region-bar select{
+    font:inherit; font-weight:600; color:var(--text-primary);
+    background:var(--surface-2); border:1px solid var(--border); border-radius:8px;
+    padding:7px 10px;
+  }
+  .region-bar .assign-note{ color:var(--text-secondary); font-size:13.5px; }
+
+  .school-grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(260px,1fr)); gap:16px; }
+  .school-card{
+    background:var(--surface); border:1px solid var(--border); border-radius:14px;
+    padding:18px; display:flex; flex-direction:column; gap:10px;
+    transition:border-color .15s ease;
+  }
+  .school-card.picked{ border-color:var(--accent); box-shadow:0 0 0 1px var(--accent) inset; }
+  .school-card .name-row{ display:flex; justify-content:space-between; align-items:flex-start; gap:8px; }
+  .school-card h3{ font-size:17px; font-weight:700; }
+  .tag-row{ display:flex; gap:6px; flex-wrap:wrap; }
+  .tag{ font-size:11.5px; font-weight:600; color:var(--text-secondary); background:var(--surface-2); border-radius:6px; padding:3px 7px; }
+  .school-card .addr{ color:var(--text-muted); font-size:12.5px; }
+  .school-card a{ color:var(--accent); text-decoration:none; font-size:12px; }
+  .stat-row{ display:flex; gap:14px; font-size:12.5px; color:var(--text-secondary); flex-wrap:wrap; }
+  .stat-row b{ color:var(--text-primary); font-family:"IBM Plex Mono",monospace; }
+
+  .pick-btn{
+    display:flex; align-items:center; justify-content:center; gap:6px;
+    font:inherit; font-weight:600; font-size:13px; cursor:pointer;
+    border:1px solid var(--border); border-radius:8px; padding:8px;
+    background:var(--surface-2); color:var(--text-secondary);
+  }
+  .pick-btn.active{ background:var(--accent); color:var(--accent-ink); border-color:var(--accent); }
+  .pick-btn:disabled{ opacity:.45; cursor:not-allowed; }
+
+  .compare-panel{
+    background:var(--surface); border:1px solid var(--border); border-radius:14px;
+    padding:24px;
+  }
+  .compare-panel.empty{ display:flex; align-items:center; justify-content:center; color:var(--text-muted); font-size:14px; padding:48px; text-align:center; }
+
+  .legend{ display:flex; gap:16px; flex-wrap:wrap; margin-bottom:18px; }
+  .legend-item{ display:flex; align-items:center; gap:6px; font-size:13px; font-weight:600; }
+  .legend-swatch{ width:11px; height:11px; border-radius:3px; }
+
+  .metric-block{ margin-bottom:26px; }
+  .metric-block:last-child{ margin-bottom:0; }
+  .metric-block .metric-title{ font-size:13px; font-weight:700; margin-bottom:3px; }
+  .metric-block .metric-sub{ font-size:12px; color:var(--text-muted); margin-bottom:12px; }
+  .bar-row{ display:grid; grid-template-columns:150px 1fr 70px; align-items:center; gap:12px; margin-bottom:9px; }
+  .bar-row .bar-label{ font-size:13px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .bar-track{ background:var(--surface-2); border-radius:6px; height:16px; overflow:hidden; }
+  .bar-fill{ height:100%; border-radius:6px; }
+  .bar-row .bar-val{ font-family:"IBM Plex Mono",monospace; font-size:12.5px; text-align:right; color:var(--text-secondary); }
+
+  table.data-table{ width:100%; border-collapse:collapse; font-size:13px; margin-top:8px; }
+  table.data-table th, table.data-table td{ padding:9px 12px; text-align:left; border-bottom:1px solid var(--border); }
+  table.data-table th{ color:var(--text-muted); font-weight:600; font-size:11px; text-transform:uppercase; letter-spacing:.03em; }
+  table.data-table td.num{ font-family:"IBM Plex Mono",monospace; text-align:right; font-variant-numeric:tabular-nums; }
+  .table-wrap{ overflow-x:auto; }
+
+  .filter-panel{
+    background:var(--surface); border:1px solid var(--border); border-radius:14px;
+    padding:24px; display:grid; grid-template-columns:1fr 1fr 1fr; gap:20px;
+  }
+  @media (max-width:900px){ .filter-panel{ grid-template-columns:1fr; } }
+  .filter-q{ display:flex; flex-direction:column; gap:10px; }
+  .filter-q .q-label{ font-size:12.5px; font-weight:700; color:var(--text-muted); text-transform:uppercase; letter-spacing:.03em; }
+  .filter-opt{
+    display:flex; align-items:center; gap:8px; font-size:13.5px;
+    border:1px solid var(--border); border-radius:8px; padding:10px 12px; cursor:pointer;
+    background:var(--surface-2);
+  }
+  .filter-opt input{ accent-color:var(--accent); }
+  .filter-opt.on{ border-color:var(--accent); background:var(--chip-bg); }
+
+  .rank-list{ display:flex; flex-direction:column; gap:10px; margin-top:18px; }
+  .rank-row{ display:grid; grid-template-columns:24px 150px 1fr 60px; align-items:center; gap:12px; }
+  .rank-row .rank-num{ font-family:"IBM Plex Mono",monospace; color:var(--text-muted); font-weight:600; }
+  .rank-row .rank-name{ font-weight:600; font-size:13.5px; }
+  .rank-bar-track{ background:var(--surface-2); border-radius:6px; height:10px; overflow:hidden; }
+  .rank-bar-fill{ height:100%; background:var(--accent); border-radius:6px; }
+  .rank-row .rank-score{ font-family:"IBM Plex Mono",monospace; text-align:right; font-size:12.5px; color:var(--text-secondary); }
+
+  .policy-list{ display:flex; flex-direction:column; }
+  .policy-item{ display:grid; grid-template-columns:96px 1fr; gap:18px; padding:16px 0; border-top:1px solid var(--border); }
+  .policy-item:first-child{ border-top:none; }
+  .policy-date{ font-family:"IBM Plex Mono",monospace; font-size:12.5px; color:var(--accent); font-weight:600; padding-top:2px; }
+  .policy-item h3{ font-size:15px; font-weight:700; margin-bottom:5px; }
+  .policy-item p{ margin:0; color:var(--text-secondary); font-size:13.5px; }
+
+  .architecture-note{
+    background:var(--surface-2); border:1px dashed var(--border); border-radius:12px;
+    padding:18px 20px; font-size:13px; color:var(--text-secondary);
+  }
+  .architecture-note code{ font-family:"IBM Plex Mono",monospace; background:var(--surface); border:1px solid var(--border); border-radius:5px; padding:1px 5px; font-size:12px; color:var(--text-primary); }
+  .architecture-note + .architecture-note{ margin-top:12px; }
+
+  footer{ margin-top:56px; padding-top:20px; border-top:1px solid var(--border); color:var(--text-muted); font-size:12.5px; }
+</style>
+
+<div class="wrap">
+
+  <header class="top">
+    <div class="title-block">
+      <h1>고교나침반</h1>
+      <p>중2~3학년이 지역 일반고를 실데이터로 비교하고, 매번 바뀌는 입시 정책까지 한눈에 확인하는 도구의 프로토타입입니다.</p>
+    </div>
+  </header>
+  <div class="badge-row">
+    <span class="badge real">서울 은평구 일반고 9곳 · 실데이터</span>
+  </div>
+  <div class="source-note">
+    <b>데이터 출처</b> — 기본정보(설립·남녀공학·주소·개교일)는 NEIS 교육정보 개방포털 Open API, 학생수·교원수는 학교알리미(schoolinfo.go.kr) 학교별 공시페이지에서 가져왔습니다 (2026-09-16 조회).
+    학교알리미 수치는 매년 공시 시점 기준으로 갱신되어 조회 시점에 따라 소폭 달라질 수 있습니다. 학급수·선택과목 수·진학현황·전출입률처럼 표 구조가 복잡해 자동 추출 신뢰도가 낮은 항목은
+    이번 버전에 넣지 않았습니다 — 아래 "연동 구조 메모" 참고.
+  </div>
+
+  <section>
+    <div class="section-head">
+      <h2>1. 지역 선택</h2>
+      <span class="hint">서부교육지원청 관할 (마포·서대문·은평)</span>
+    </div>
+    <div class="region-bar">
+      <select id="regionSelect">
+        <option>서울특별시 은평구</option>
+      </select>
+      <span class="assign-note" id="assignNote"></span>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>2. 일반고 목록</h2>
+      <span class="hint">최대 4개교까지 비교에 담을 수 있어요</span>
+    </div>
+    <div class="school-grid" id="schoolGrid"></div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>3. 규모·배치 비교</h2>
+      <span class="hint">학생수, 학생 1인당 교원수(낮을수록 밀착 관리) — 둘 다 실공시 수치</span>
+    </div>
+    <div class="compare-panel" id="comparePanel"></div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>4. 조건으로 좁혀보기</h2>
+      <span class="hint">3가지 조건을 고르면 9개교를 다시 정렬합니다</span>
+    </div>
+    <div class="filter-panel" id="filterPanel"></div>
+    <div class="rank-list" id="rankList"></div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>5. 교육정책 업데이트</h2>
+      <span class="hint">실제 조사한 최근 정책 동향 3건</span>
+    </div>
+    <div class="policy-list" id="policyList"></div>
+  </section>
+
+  <section>
+    <div class="section-head"><h2>연동 구조 메모</h2></div>
+    <div class="architecture-note">
+      이 화면은 NEIS·학교알리미에서 직접 조사해 정리한 JSON을 그대로 그립니다. 브라우저는 두 사이트를 실시간으로 다시 호출하지 않습니다(CORS 제약 + 소셜로그인 인증키 필요).
+      실제 서비스에서는 <code>fetch_neis.py</code>가 NEIS Open API를, 학교알리미 쪽은 <code>data.go.kr</code>의 CSV 벌크 다운로드를 정기 배치로 받아
+      <code>build_profiles.py</code>가 하나의 <code>school_profiles.json</code>으로 병합하도록 구성합니다.
+    </div>
+    <div class="architecture-note">
+      아직 못 채운 항목: <b>학급수·학급당 학생수</b>(공시페이지 표 구조가 복잡해 이번엔 자동 추출을 신뢰할 수 없었음), <b>진로·진학 현황</b>(4년제 대학 진학률, 특목고 진학 비율),
+      <b>학업중단·전출입 현황</b>, <b>선택과목 개설 수</b>(고교학점제 관련), <b>학교회계 예산</b>. 전부 학교알리미 공시항목에는 있지만 data.go.kr CSV로 받아야 안정적으로 붙일 수 있습니다.
+    </div>
+  </section>
+
+  <footer>
+    고교나침반 프로토타입 · 서울 은평구 일반고 9곳 실데이터 기반 · 정책 항목 3건은 2025~2026년 실제 동향
+  </footer>
+</div>
+
+<script>
+const DATA = {
+  region: {
+    name: "서울특별시 은평구",
+    office_of_edu: "서울특별시서부교육지원청 (마포구·서대문구·은평구 관할)",
+    assignment_method: "서울시 고교선택제 — 2학군(서부) 소속, 선지원 후추첨 방식으로 일반고 배정"
+  },
+  schools: [
+    { school_code:"7010153", name:"동명여자고등학교", hs_type:"일반고", establishment:"사립", coed:"여자",
+      address:"서울특별시 은평구 통일로 793", founded:"1921-06-03", homepage:"http://dongmyung.sen.hs.kr",
+      students_total:835, teachers_total:77 },
+    { school_code:"7010190", name:"선일여자고등학교", hs_type:"일반고", establishment:"사립", coed:"여자",
+      address:"서울특별시 은평구 갈현로29길 27", founded:"1971-12-27", homepage:"http://sunil.sen.hs.kr",
+      students_total:570, teachers_total:61 },
+    { school_code:"7010191", name:"선정고등학교", hs_type:"일반고", establishment:"사립", coed:"남녀공학",
+      address:"서울특별시 은평구 서오릉로20길 19", founded:"1950-05-22", homepage:"http://sunjung.sen.hs.kr",
+      students_total:1056, teachers_total:85 },
+    { school_code:"7010203", name:"숭실고등학교", hs_type:"일반고", establishment:"사립", coed:"남자",
+      address:"서울특별시 은평구 은평터널로7길 6", founded:"1897-10-10", homepage:"http://soongsil.sen.hs.kr",
+      students_total:1099, teachers_total:91 },
+    { school_code:"7010983", name:"신도고등학교", hs_type:"일반고", establishment:"공립", coed:"남녀공학",
+      address:"서울특별시 은평구 통일로 961", founded:"2011-03-01", homepage:"https://sindo.sen.hs.kr",
+      students_total:586, teachers_total:68 },
+    { school_code:"7010219", name:"예일여자고등학교", hs_type:"일반고", establishment:"사립", coed:"여자",
+      address:"서울특별시 은평구 연서로 117", founded:"1965-09-26", homepage:"http://www.yale.hs.kr",
+      students_total:759, teachers_total:76 },
+    { school_code:"7010882", name:"은평고등학교", hs_type:"일반고", establishment:"공립", coed:"남녀공학",
+      address:"서울특별시 은평구 갈현로15길 47", founded:"2009-03-01", homepage:"http://ep.sen.hs.kr",
+      students_total:462, teachers_total:56 },
+    { school_code:"7010883", name:"진관고등학교", hs_type:"일반고", establishment:"공립", coed:"남녀공학",
+      address:"서울특별시 은평구 진관4로 26", founded:"2009-01-02", homepage:"",
+      students_total:821, teachers_total:74 },
+    { school_code:"7010248", name:"충암고등학교", hs_type:"일반고", establishment:"사립", coed:"남자",
+      address:"서울특별시 은평구 가좌로5길 5", founded:"1968-01-10", homepage:"",
+      students_total:1044, teachers_total:88 }
+  ],
+  policy_updates: [
+    { date:"2025-03", title:"고교학점제 전 학년 전면 시행",
+      summary:"전국 모든 고등학교에서 학생이 진로에 따라 과목을 선택·이수하는 고교학점제가 전 학년 대상으로 시행됨. 학교별 선택과목 개설 수 편차가 커져 진학 전 확인이 중요해짐." },
+    { date:"2026-02", title:"학점 이수 기준 완화",
+      summary:"2026학년도 1·2학년부터 창의적 체험활동 출석 기준이 '3년 총 수업시수'에서 '학년별 수업일수' 기준으로 바뀌고, 선택과목의 학업성취율 기준이 폐지되어 출석률만 반영됨." },
+    { date:"2026-08", title:"일부 외고의 전국단위 자사고 전환 추진",
+      summary:"일부 지역 외국어고가 전국단위 자율형사립고 전환을 추진 중. 전환 시 외국어 시수를 줄이고 수학·과학 시수를 늘리는 방향으로, 인근 일반고 지원 경쟁률에도 영향을 줄 수 있어 지역별 동향 확인이 필요함." }
+  ]
+};
+
+DATA.schools.forEach(s => { s.ratio = +(s.students_total / s.teachers_total).toFixed(1); });
+
+const SERIES_COLORS = ["var(--s1)", "var(--s2)", "var(--s3)", "var(--s4)"];
+const MAX_STUDENTS = Math.max(...DATA.schools.map(s => s.students_total));
+const MIN_RATIO = Math.min(...DATA.schools.map(s => s.ratio));
+const MAX_RATIO = Math.max(...DATA.schools.map(s => s.ratio));
+
+let picked = [];
+let answers = { size:"any", coed:"any", care:"any" };
+
+function el(tag, cls, html){
+  const n = document.createElement(tag);
+  if(cls) n.className = cls;
+  if(html !== undefined) n.innerHTML = html;
+  return n;
+}
+
+function renderRegion(){
+  document.getElementById("assignNote").textContent =
+    DATA.region.office_of_edu + " · " + DATA.region.assignment_method;
+}
+
+function renderSchoolGrid(){
+  const grid = document.getElementById("schoolGrid");
+  grid.innerHTML = "";
+  DATA.schools.forEach(s => {
+    const card = el("div", "school-card" + (picked.includes(s.school_code) ? " picked" : ""));
+    card.innerHTML = `
+      <div class="name-row"><h3>${s.name}</h3></div>
+      <div class="tag-row">
+        <span class="tag">${s.hs_type}</span>
+        <span class="tag">${s.establishment}</span>
+        <span class="tag">${s.coed}</span>
+      </div>
+      <div class="addr">${s.address}</div>
+      <div class="stat-row">
+        <span>학생 <b>${s.students_total.toLocaleString()}</b></span>
+        <span>교원 <b>${s.teachers_total}</b></span>
+        <span>학생/교원 <b>${s.ratio}</b></span>
+      </div>
+      ${s.homepage ? `<a href="${s.homepage}" target="_blank" rel="noopener">학교 홈페이지 ↗</a>` : ""}
+    `;
+    const btn = el("button", "pick-btn" + (picked.includes(s.school_code) ? " active" : ""),
+      picked.includes(s.school_code) ? "비교에서 빼기" : "비교 담기");
+    if(!picked.includes(s.school_code) && picked.length >= 4) btn.disabled = true;
+    btn.addEventListener("click", () => {
+      if(picked.includes(s.school_code)){
+        picked = picked.filter(c => c !== s.school_code);
+      } else if(picked.length < 4){
+        picked.push(s.school_code);
+      }
+      renderSchoolGrid();
+      renderComparePanel();
+    });
+    card.appendChild(btn);
+    grid.appendChild(card);
+  });
+}
+
+function buildBarBlock(title, sub, schools, valueFn, maxVal, fmt){
+  let html = `<div class="metric-block"><div class="metric-title">${title}</div><div class="metric-sub">${sub}</div>`;
+  schools.forEach((s, i) => {
+    const v = valueFn(s);
+    const pct = Math.max(4, (v / maxVal * 100)).toFixed(0);
+    html += `
+      <div class="bar-row">
+        <span class="bar-label">${s.name}</span>
+        <span class="bar-track"><span class="bar-fill" style="width:${pct}%; background:${SERIES_COLORS[i]}"></span></span>
+        <span class="bar-val">${fmt(v)}</span>
+      </div>`;
+  });
+  html += `</div>`;
+  return html;
+}
+
+function buildDataTable(schools){
+  let html = `<div class="table-wrap"><table class="data-table"><thead><tr>
+    <th>학교</th><th>설립</th><th>남녀공학</th><th>개교</th><th class="num">학생수</th><th class="num">교원수</th><th class="num">학생/교원</th>
+  </tr></thead><tbody>`;
+  schools.forEach(s => {
+    html += `<tr>
+      <td>${s.name}</td><td>${s.establishment}</td><td>${s.coed}</td><td>${s.founded}</td>
+      <td class="num">${s.students_total.toLocaleString()}</td><td class="num">${s.teachers_total}</td><td class="num">${s.ratio}</td>
+    </tr>`;
+  });
+  html += `</tbody></table></div>`;
+  return html;
+}
+
+function renderComparePanel(){
+  const panel = document.getElementById("comparePanel");
+  const schools = DATA.schools.filter(s => picked.includes(s.school_code));
+
+  if(schools.length < 2){
+    panel.className = "compare-panel empty";
+    panel.innerHTML = "비교하려면 학교 카드에서 2개 이상 담아 보세요.";
+    return;
+  }
+  panel.className = "compare-panel";
+
+  const legend = schools.map((s,i) =>
+    `<span class="legend-item"><span class="legend-swatch" style="background:${SERIES_COLORS[i]}"></span>${s.name}</span>`
+  ).join("");
+
+  panel.innerHTML = `<div class="legend">${legend}</div>`
+    + buildBarBlock("학생 수", "재학생 전체 규모 — 클수록 또래 폭·동아리 선택지가 넓은 편", schools, s=>s.students_total, MAX_STUDENTS, v=>v.toLocaleString()+"명")
+    + buildBarBlock("학생 1인당 교원 배치", "학생수 ÷ 교원수 — 낮을수록 교사 1인이 맡는 학생이 적어 밀착 관리에 유리", schools, s=>s.ratio, MAX_RATIO, v=>v+"명")
+    + buildDataTable(schools);
+}
+
+const FILTERS = [
+  { key:"size", q:"학교 규모", opts:[
+      { v:"any", label:"무관" },
+      { v:"large", label:"큰 학교 선호 (또래 폭·선택지)" },
+      { v:"small", label:"작은 학교 선호 (밀착 관리)" }
+  ]},
+  { key:"coed", q:"남녀공학 여부", opts:[
+      { v:"any", label:"무관" },
+      { v:"coed", label:"남녀공학 선호" },
+      { v:"single", label:"단성 학교 선호" }
+  ]},
+  { key:"care", q:"교원 배치 밀도", opts:[
+      { v:"any", label:"무관" },
+      { v:"care", label:"학생 1인당 교원수 낮은 곳 우선" }
+  ]}
+];
+
+function renderFilters(){
+  const panel = document.getElementById("filterPanel");
+  panel.innerHTML = "";
+  FILTERS.forEach(f => {
+    const block = el("div","filter-q");
+    block.innerHTML = `<div class="q-label">${f.q}</div>`;
+    f.opts.forEach(opt => {
+      const label = el("label", "filter-opt" + (answers[f.key]===opt.v ? " on" : ""));
+      label.innerHTML = `<input type="radio" name="${f.key}" ${answers[f.key]===opt.v?"checked":""}/> ${opt.label}`;
+      label.querySelector("input").addEventListener("change", () => {
+        answers[f.key] = opt.v;
+        renderFilters();
+        renderRanking();
+      });
+      block.appendChild(label);
+    });
+    panel.appendChild(block);
+  });
+}
+
+function renderRanking(){
+  let list = DATA.schools.slice();
+
+  if(answers.coed === "coed") list = list.filter(s => s.coed === "남녀공학");
+  if(answers.coed === "single") list = list.filter(s => s.coed !== "남녀공학");
+
+  const scored = list.map(s => {
+    let score = 50;
+    if(answers.size === "large") score += (s.students_total - MAX_STUDENTS/2) / MAX_STUDENTS * 60;
+    if(answers.size === "small") score += (MAX_STUDENTS/2 - s.students_total) / MAX_STUDENTS * 60;
+    if(answers.care === "care") score += (MAX_RATIO - s.ratio) / (MAX_RATIO - MIN_RATIO) * 40;
+    return { name:s.name, score };
+  }).sort((a,b) => b.score - a.score);
+
+  const max = Math.max(...scored.map(s=>s.score), 1);
+  const listEl = document.getElementById("rankList");
+  listEl.innerHTML = "";
+  scored.forEach((s, i) => {
+    const row = el("div","rank-row");
+    row.innerHTML = `
+      <span class="rank-num">${i+1}</span>
+      <span class="rank-name">${s.name}</span>
+      <span class="rank-bar-track"><span class="rank-bar-fill" style="width:${Math.max(4,(s.score/max*100)).toFixed(0)}%"></span></span>
+      <span class="rank-score">${s.score.toFixed(0)}</span>
+    `;
+    listEl.appendChild(row);
+  });
+}
+
+function renderPolicy(){
+  const list = document.getElementById("policyList");
+  list.innerHTML = "";
+  DATA.policy_updates.forEach(p => {
+    const item = el("div","policy-item");
+    item.innerHTML = `<div class="policy-date">${p.date}</div><div><h3>${p.title}</h3><p>${p.summary}</p></div>`;
+    list.appendChild(item);
+  });
+}
+
+renderRegion();
+renderSchoolGrid();
+renderComparePanel();
+renderFilters();
+renderRanking();
+renderPolicy();
+</script>

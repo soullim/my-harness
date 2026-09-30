@@ -1,0 +1,103 @@
+{
+  "_note": "이 파일은 UI 프로토타입 검증용 예시 데이터입니다. 실제 학교/지역과 무관한 가상의 값입니다.",
+  "region": {
+    "name": "은파시 다솔구",
+    "assignment_method": "고교선택제(선지원 후추첨) — 2, 3지망까지 작성, 통학구역 내 배정 우선",
+    "note": "실제 서비스에서는 시도교육청 고입전형포털 공고를 지역별로 큐레이션해 이 필드를 채운다."
+  },
+  "schools": [
+    {
+      "school_code": "DEMO001",
+      "name": "다솔고등학교",
+      "hs_type": "일반고",
+      "establishment": "공립",
+      "coed": "남녀공학",
+      "address": "은파시 다솔구 미루로 12",
+      "students_total": 612,
+      "classes_total": 21,
+      "elective_subjects": 47,
+      "characteristics": "과학중점과정 운영, 방과후 심화반 다수",
+      "axes": {
+        "focus_intensity": 78,
+        "class_room_margin": 52,
+        "track_diversity": 81,
+        "environment_investment": 66,
+        "cohort_stability": 74
+      }
+    },
+    {
+      "school_code": "DEMO002",
+      "name": "청람고등학교",
+      "hs_type": "일반고",
+      "establishment": "사립",
+      "coed": "남녀공학",
+      "address": "은파시 다솔구 청람대로 88",
+      "students_total": 745,
+      "classes_total": 24,
+      "elective_subjects": 33,
+      "characteristics": "예체능 특기적성 프로그램, 동아리 활동 비중 높음",
+      "axes": {
+        "focus_intensity": 41,
+        "class_room_margin": 38,
+        "track_diversity": 55,
+        "environment_investment": 84,
+        "cohort_stability": 63
+      }
+    },
+    {
+      "school_code": "DEMO003",
+      "name": "강변고등학교",
+      "hs_type": "일반고",
+      "establishment": "공립",
+      "coed": "남녀공학",
+      "address": "은파시 다솔구 강변로 5",
+      "students_total": 398,
+      "classes_total": 15,
+      "elective_subjects": 29,
+      "characteristics": "소규모 학급 운영, 1인당 학습 관리 밀착",
+      "axes": {
+        "focus_intensity": 55,
+        "class_room_margin": 88,
+        "track_diversity": 44,
+        "environment_investment": 47,
+        "cohort_stability": 82
+      }
+    },
+    {
+      "school_code": "DEMO004",
+      "name": "새들고등학교",
+      "hs_type": "일반고",
+      "establishment": "공립",
+      "coed": "여자",
+      "address": "은파시 다솔구 새들길 21",
+      "students_total": 560,
+      "classes_total": 19,
+      "elective_subjects": 52,
+      "characteristics": "국제교류 프로그램, 외국어 선택과목 다양",
+      "axes": {
+        "focus_intensity": 69,
+        "class_room_margin": 60,
+        "track_diversity": 90,
+        "environment_investment": 58,
+        "cohort_stability": 70
+      }
+    }
+  ],
+  "policy_updates": [
+    {
+      "date": "2025-03",
+      "title": "고교학점제 전 학년 전면 시행",
+      "summary": "전국 모든 고등학교에서 학생이 진로에 따라 과목을 선택·이수하는 고교학점제가 전 학년 대상으로 시행됨. 학교별 선택과목 개설 수 편차가 커져 진학 전 확인이 중요해짐."
+    },
+    {
+      "date": "2026-02",
+      "title": "학점 이수 기준 완화",
+      "summary": "2026학년도 1·2학년부터 창의적 체험활동 출석 기준이 '3년 총 수업시수'에서 '학년별 수업일수' 기준으로 바뀌고, 선택과목의 학업성취율 기준이 폐지되어 출석률만 반영됨."
+    },
+    {
+      "date": "2026-08",
+      "title": "일부 외고의 전국단위 자사고 전환 추진",
+      "summary": "일부 지역 외국어고가 전국단위 자율형사립고 전환을 추진 중. 전환 시 외국어 시수를 줄이고 수학·과학 시수를 늘리는 방향으로, 인근 일반고 지원 경쟁률에도 영향을 줄 수 있어 지역별 동향 확인이 필요함."
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "_about": "고교나침반 하네스 판정 규칙 SSOT. 값 출처: docs/harness-gates.md 2~3절, docs/school-design.md. 이 파일은 사람만 수정한다.",
+
+  "screens": {
+    "region":  "지역 선택",
+    "list":    "일반고 목록",
+    "compare": "학교 비교",
+    "match":   "조건 매칭",
+    "policy":  "정책 업데이트"
+  },
+  "screen_count": { "min": 2, "max": 3 },
+
+  "frame": { "width_px": 390, "height_px": 844 },
+
+  "colors_hex": ["#141414", "#262626", "#FFFFFF", "#F3F3F3", "#F0F0F0", "#E0E0E0", "#707070", "#ADADAD", "#0066FF", "#C62828"],
+  "colors_rgba_allowed": ["rgba(115,115,115,0.56)", "rgba(20,20,20,0.4)"],
+  "colors_named_forbidden": ["red", "blue", "green", "black", "white", "gray", "grey", "orange", "yellow", "purple", "pink", "navy", "teal", "coral"],
+
+  "accent": { "hex": "#0066FF", "max_per_screen": 2, "forbid_on_button_background": true },
+
+  "font_families": ["Pretendard", "Pretendard Variable", "-apple-system", "BlinkMacSystemFont", "Apple SD Gothic Neo", "Noto Sans KR", "sans-serif", "inherit"],
+  "font_sizes_px": [32, 28, 24, 20, 18, 17, 15, 13, 12],
+  "spacing_px": [0, 4, 8, 12, 16, 24, 32, 48, 64],
+  "radius_px": [0, 16, 24, 9999],
+  "shadow": { "allowed_only_when_selector_contains": "segmented" },
+  "letter_spacing_allowed": ["0", "0px", "normal"],
+  "text_transform_forbidden": ["uppercase"],
+  "emoji_ranges": ["1F000-1FAFF", "2600-26FF", "2705", "274C", "2728", "2B50"],
+
+  "v1_rank_patterns": ["\\d+\\s*위(?!원|치)", "\\d+\\s*등(?!급)", "상위\\s*\\d+\\s*%", "(?<!우선)순위", "랭킹"],
+  "v1_raw_achievement_pattern": "학업성취도[^\\n]{0,10}\\d",
+  "v2": { "date_pattern": "기준\\s*\\d{4}\\.\\d{2}\\.\\d{2}", "source_word": "출처", "applies_to": ["region", "list", "compare", "match", "policy"] },
+
+  "gates": {
+    "G1": { "min_refs_per_screen": 3 },
+    "G2": { "required_headings": ["목적", "주요 요소", "연결 유저스토리"] },
+    "G3": { "max_style_blocks": 1, "inline_style_allowed": false, "allowed_stylesheet_link_contains": "pretendard" },
+    "G5": { "line_pattern": "^시안 [A-Z] — https?://\\S+$" }
+  },
+
+  "retry": { "g1_g3_max": 1, "g4_max": 2, "reject_max": 2 },
+
+  "share": {
+    "base_url": "",
+    "_about": "S5 공유 URL 앞부분. 예: https://<계정>.github.io/<저장소>/drafts/  — 비어 있으면 sharer는 멈추고 본인에게 묻는다."
+  }
+}

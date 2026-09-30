@@ -1,0 +1,5 @@
+{
+  "_about": "fail-sample.html에 일부러 심은 위반 규칙 목록. selftest.py가 판정 결과의 규칙 종류와 정확히 같은지 비교한다.",
+  "fail_sample_rules": ["font_family", "spacing", "font_size", "color", "letter_spacing", "uppercase", "radius", "shadow", "accent", "emoji", "V1", "V2"],
+  "pass_sample_violations": 0
+}
