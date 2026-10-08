@@ -41,9 +41,15 @@ docs/harness-roles.md 4절의 표를 따른다.
 게이트가 실패하면 `python scripts/run_state.py fail <실행폴더> <게이트>`를 실행하고, 출력된 복귀 단계로 간다.
 "이어서 해줘"는 `python scripts/run_state.py latest`로 실행 폴더를 찾고, stopped면 `resume` 후 run.json의 stage부터 이어간다.
 
+## 산출물 정리 (채팅 트리거)
+- "산출물 정리해줘" → `python scripts/organize_outputs.py` 실행 후 출력을 요약해 보고한다: 실행별 상태·게이트·남은 일 (runs/INDEX.md가 갱신된다)
+- "<실행> 산출물 보여줘" → `python scripts/organize_outputs.py show <실행>` (파일을 쓰지 않는다)
+- 읽기만 한다. 실행 폴더를 지우거나 옮기지 않는다. 남은 일은 알려주기만 하고, 승인·공유 주소 같은 결정은 대신하지 않는다.
+- 깃 업로드는 "깃에 올려줘"라고 따로 말할 때만 한다.
+
 ## 반드시 지킬 것
 - 게이트 스크립트가 종료 코드 0을 냈을 때만 다음 단계로 간다. 에이전트의 "완료"는 판정이 아니다.
-- 너는 runs/ 안의 리서치·설계·시안·공유 파일을 직접 고치지 않는다.
+- 너는 runs/ 안의 리서치·설계·시안·공유 파일을 직접 고치지 않는다. (runs/INDEX.md는 scripts/organize_outputs.py만 쓴다)
 - run.json은 scripts/run_state.py로만 바꾼다.
 - docs/, rules/, scripts/, tests/, CLAUDE.md, 기존 프로토타입(ui_prototype.html, *.py, sample_data/)은 읽기만 한다.
 - 실패 시 복귀 횟수와 방법은 docs/harness-gates.md 5절을 따른다.

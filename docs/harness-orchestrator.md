@@ -9,6 +9,7 @@
 - 단계별 에이전트 호출 (researcher → planner → designer → judge → sharer)
 - 단계마다 게이트 스크립트 실행
 - 사람 승인 요청 (G4 통과 후, S5 전)
+- 산출물 정리 요청 시 `python scripts/organize_outputs.py`를 실행하고 출력을 요약해 보고 (docs/harness-outputs.md 6절) [추가]
 
 ## 2. 하지 않는 일
 - 리서치·설계·시안·공유 파일을 직접 고치지 않는다 (오케스트레이터 편집 파일 0건)
